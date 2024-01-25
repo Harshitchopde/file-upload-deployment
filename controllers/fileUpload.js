@@ -5,8 +5,11 @@ const cloudinary = require("cloudinary").v2
 
 exports.localfileupload = (req,res)=>{
     try {
-        const singlefile = req.files.file;
-        console.log("File: ",singlefile);
+        console.log("run the first");
+        console.log(req);
+        
+        const singlefile = req.files.singlefile;
+        console.log("File1: ",singlefile);
         const path = __dirname +"/files/"+Date.now()+`.${singlefile.name.split(".")[1]}`;
         console.log(path);
         singlefile.mv(path,(err)=>{
@@ -42,7 +45,9 @@ async function upoadFile(file,folder){
 exports.fileUpload =async (req,res)=>{
     try {
         const {name,email,tags} = req.body;
-        const file = req.files.imageFile;
+        console.log(req.files);
+        
+        const file = req.files.singlefile;
         // console.log("File: ",file);
         const type = file.name.split(".")[1].toLowerCase();
         const supportedFormat = ["jpg","png","jpeg"];
